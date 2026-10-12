@@ -1,0 +1,34 @@
+name: Actualizar Noticias Diarias
+
+on:
+  schedule:
+    # Corre todos los días a las 08:00 AM hora de Chile (11:00 UTC)
+    - cron: '0 11 * * *'
+  # Permite ejecutarlo a mano con un botón para probarlo cuando quieras
+  workflow_dispatch:
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar librerías
+        run: |
+          pip install agno google-genai supabase pydantic python-dotenv
+
+      - name: Ejecutar Agente de Agno + Gemini
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          cd agent
+          python update_news.py
