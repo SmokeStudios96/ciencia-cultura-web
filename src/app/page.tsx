@@ -1,9 +1,6 @@
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
-import { Search, Menu, Sparkles, TrendingUp, ArrowRight, Clock } from 'lucide-react';
-
-// Forzar renderizado dinámico para evitar errores de pre-render en Vercel
-export const instant = false;
+import { Search, Menu, Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
 
 export default async function Home() {
   const { data: articles } = await supabase
@@ -24,12 +21,11 @@ export default async function Home() {
     year: 'numeric'
   });
 
-  // Imagen de respaldo si el artículo no tiene una directa
   const fallbackImage = (cat?: string) => {
     if (cat === 'Astronomía') return 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80';
     if (cat === 'Cultura' || cat === 'Arqueología') return 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=1200&q=80';
     if (cat === 'Tecnología') return 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80';
-    return 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80'; // Naturaleza/Ciencia
+    return 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80';
   };
 
   return (
