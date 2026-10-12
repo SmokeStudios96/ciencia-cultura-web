@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, Clock, Share2, Sparkles } from 'lucide-react';
 
 // Forzar renderizado dinámico para evitar errores de pre-render en Vercel
-export const dynamic = 'force-dynamic';
+export const instant = false;
 
 export default async function ArticlePage({
   params,

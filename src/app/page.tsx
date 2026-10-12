@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 import { Search, Menu, Sparkles, TrendingUp, ArrowRight, Clock } from 'lucide-react';
 
 // Forzar renderizado dinámico para evitar errores de pre-render en Vercel
-export const dynamic = 'force-dynamic';
+export const instant = false;
 
 export default async function Home() {
   const { data: articles } = await supabase
